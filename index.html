@@ -604,7 +604,7 @@
                 try {
                     const prompt = `Dịch từ tiếng Nga "${word}" sang tiếng Việt. Chỉ trả về nghĩa tiếng Việt, không thêm bất kỳ văn bản giải thích nào khác.`;
                     const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "text/plain" } };
-                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`;
                     const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                     if (!response.ok) throw new Error(`API error: ${response.status}`);
                     const result = await response.json();
