@@ -784,7 +784,7 @@
                 explanationSection.classList.remove('hidden');
                 explanationContentDiv.innerHTML = '';
                 try {
-                    const prompt = `Giải thích nội dung ngữ pháp tiếng Nga sau đây một cách chi tiết và dễ hiểu bằng tiếng Việt, dành cho người học tiếng Nga. Tập trung vào các khái niệm ngữ pháp, ví dụ và quy tắc được trình bày trong văn bản:\n\n${currentRawText}`;
+                    const prompt = `Giải thích nội dung ngữ pháp tiếng Nga sau đây một cách chi tiết và dễ hiểu bằng tiếng Việt, dành cho người học tiếng Nga. Tập trung vào nghĩa các cụm từ, các cấu trúc ngữ pháp được sử dụng trong văn bản:\n\n${currentRawText}`;
                     const explanation = await callAI(prompt, "text/plain");
                     explanationContentDiv.innerHTML = explanation.replace(/\n/g, '<br>');
                 } catch (error) {
