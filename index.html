@@ -600,7 +600,7 @@
             async function getTranslation(word) {
                 translateLoadingSpinner.style.display = 'block';
                 selectionTranslateSpinner.style.display = 'block';
-                const apiKey = "AIzaSyByK7ww7MRpFmUHJU7Mz70qj6OhjUFYMCg";
+                const apiKey = "AIzaSyBnWBmbz8twphuLTMw92I4CFHrB2IpcTlI";
                 try {
                     const prompt = `Dịch từ tiếng Nga "${word}" sang tiếng Việt. Chỉ trả về nghĩa tiếng Việt, không thêm bất kỳ văn bản giải thích nào khác.`;
                     const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "text/plain" } };
