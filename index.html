@@ -61,6 +61,22 @@
                 <button id="explain-text-button" class="button-base button-secondary">Giải thích ngữ pháp</button>
                 <button id="translate-full-text-button" class="button-base button-secondary">Dịch toàn bộ văn bản</button>
             </div>
+
+            <div id="batch-controls" class="hidden mt-4 p-3 border border-gray-300 rounded-lg bg-gray-50 space-y-3">
+                <div class="flex justify-between items-center text-sm font-medium">
+                    <span id="batch-status-text" class="text-gray-700">Đang xử lý...</span>
+                    <span id="batch-timer" class="text-gray-600 font-mono">00:00</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="batch-progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <div id="batch-progress-text" class="text-center text-sm text-gray-600"></div>
+                <div class="flex justify-center gap-4">
+                    <button id="batch-pause-resume-button" class="button-base button-secondary px-4 py-2">Tạm dừng</button>
+                    <button id="batch-stop-button" class="button-base button-secondary bg-red-600 hover:bg-red-700 px-4 py-2">Dừng hẳn</button>
+                </div>
+            </div>
+
              <div class="tts-controls mt-4 space-y-3">
                 <h3 class="text-lg font-medium text-center">Công cụ đọc thành tiếng</h3>
                 <div class="flex items-center gap-4">
@@ -115,25 +131,34 @@
         <div id="stressed-text-section" class="mt-8 hidden">
             <div class="section-header">
                 <h3>Văn bản với trọng âm </h3>
-                <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                <div class="flex gap-2">
+                    <button id="copy-stressed-button" class="button-base button-secondary text-xs px-2 py-1">Sao chép</button>
+                    <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
             </div>
-            <div id="stressed-content" class="text-gray-700 text-content section-content"></div>
+            <div id="stressed-content" class="text-gray-700 section-content" style="max-height: 500px; overflow-y: auto;"></div>
             <div id="stressed-loading-spinner" class="loading-spinner"></div>
         </div>
         
         <div id="explanation-section" class="mt-8 hidden">
             <div class="section-header">
                 <h3>Giải thích nội dung văn bản</h3>
-                <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                <div class="flex gap-2">
+                    <button id="copy-explanation-button" class="button-base button-secondary text-xs px-2 py-1">Sao chép</button>
+                    <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
             </div>
-            <div id="explanation-content" class="text-gray-700 section-content"></div>
+            <div id="explanation-content" class="text-gray-700 section-content space-y-4" style="max-height: 500px; overflow-y: auto;"></div>
             <div id="explanation-loading-spinner" class="loading-spinner"></div>
         </div>
 
         <div id="full-translation-section" class="mt-8 hidden">
             <div class="section-header">
                 <h3>Bản dịch toàn bộ văn bản</h3>
-                <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                <div class="flex gap-2">
+                    <button id="copy-translation-button" class="button-base button-secondary text-xs px-2 py-1">Sao chép</button>
+                    <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
             </div>
             <div id="full-translation-content" class="text-gray-700 section-content space-y-4"></div>
             <div id="full-translation-loading-spinner" class="loading-spinner"></div>
@@ -144,21 +169,20 @@
             <ul>
                 <li><a href="https://russiangram.com" target="_blank">RussianGram.com</a> - Công cụ kiểm tra trọng âm và chia động từ tiếng Nga.</li>
                 <li><a href="https://vtudien.com/nga-viet" target="_blank">vtudien.com</a> - Từ điển Nga-Việt online.</li>
-                <li><a href="http://gramota.ru/" target="_blank">Gramota.ru</a> - Cổng thông tin uy tín về ngôn ngữ Nga, bao gồm từ điển và kiểm tra chính tả.</li>
-                <li><a href="https://en.wiktionary.org/wiki/Wiktionary:Main_Page" target="_blank">Wiktionary</a> - Từ điển mở đa ngôn ngữ, cung cấp thông tin chi tiết về từ nguyên, phát âm và cách sử dụng.</li>
-                <li><a href="https://www.wordreference.com/" target="_blank">WordReference</a> - Từ điển song ngữ phổ biến với nhiều ví dụ và diễn đàn thảo luận.</li>
+                <li><a href="http://gramota.ru/" target="_blank">Gramota.ru</a> - Cổng thông tin uy tín về ngôn ngữ Nga.</li>
+                <li><a href="https://en.wiktionary.org/wiki/Wiktionary:Main_Page" target="_blank">Wiktionary</a> - Từ điển mở đa ngôn ngữ.</li>
+                <li><a href="https://www.wordreference.com/" target="_blank">WordReference</a> - Từ điển song ngữ phổ biến.</li>
                <li>*Website này được tạo ra bởi <a href="https://www.facebook.com/lopmaybay" target="_blank">Phạm Đăng Hiển</a>, mọi góp ý xin liên hệ qua email: lopmaybay@gmail.com.</li>
             </ul>
         </div>
 
-<div id="lookup-modal" class="modal-overlay">
+
+        <div id="lookup-modal" class="modal-overlay">
             <div id="modal-content-inner" class="modal-content">
                 <button id="close-lookup-modal" class="close-button" title="Đóng">&times;</button>
-                
                 <h2 class="text-xl font-semibold mb-3 text-gray-800 flex items-center">
-                    <span>Tra cứu từ:</span>
+                    <!-- <span>Tra:</span> -->
                     <span id="selected-word-modal" class="ml-2 font-bold text-indigo-600"></span>
-                    
                     <button id="modal-pronounce-button" class="ml-2 p-1 rounded-full hover:bg-gray-200 active:bg-gray-300 transition-colors inline-flex items-center justify-center" title="Phát âm lại">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .89-1.077 1.337-1.707.707L5.586 15z" />
@@ -169,11 +193,13 @@
                     <a id="vtudien-link" href="#" target="_blank" class="link-button">Tra từ điển (vtudien.com)</a>
                     <a id="youglish-link" href="#" target="_blank" class="link-button">Tra YouGlish</a>
                     <a id="wiktionary-link" href="#" target="_blank" class="link-button">Tra Wiktionary</a>
+                    <button id="modal-copy-button" class="link-button" style="background-color: #f3f4f6; color: #4b5563;">Sao chép từ</button>
                 </div>
                 <div id="google-translate-result" class="mt-4"></div>
                 <div id="translate-loading-spinner" class="loading-spinner"></div>
             </div>
         </div>
+
         <div id="selection-popup" class="modal-content text-selection-popup hidden">
             <button id="close-selection-popup" class="close-button" title="Đóng">&times;</button>
             <div class="flex flex-col space-y-2">
@@ -183,9 +209,21 @@
             <div id="selection-translate-result" class="mt-2 p-2 bg-gray-50 border border-gray-200 rounded-md text-gray-700 text-sm hidden"></div>
             <div id="selection-translate-spinner" class="loading-spinner"></div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.5.1/mammoth.browser.min.js"></script>
+        <div id="api-error-modal" class="modal-overlay" style="display: none; background-color: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 1002;">
+            <div class="modal-content" style="position: relative; max-width: 400px; animation: none; cursor: default; top: auto; left: auto;">
+                <h2 class="text-xl font-semibold mb-3 text-red-600">Đã xảy ra lỗi</h2>
+                <p id="api-error-message" class="mb-4 text-gray-700" style="white-space: pre-wrap; word-wrap: break-word;">
+                    Đã xảy ra lỗi khi gọi API. Bạn có thể đã vượt quá giới hạn. Vui lòng đợi một chút rồi thử lại.
+                </p>
+                <div class="flex justify-end gap-3">
+                    <button id="api-error-cancel" class="button-base button-secondary">Kết thúc</button>
+                    <button id="api-error-retry" class="button-base button-primary">Thử lại</button>
+                </div>
+            </div>
+        </div>
+
+    </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.5.1/mammoth.browser.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
